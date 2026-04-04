@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丁齐儿 Qier Ding · Portfolio 2026</title>
+<style>
+  :root{
+    --gold:#C9A96E;--gold-dim:rgba(201,169,110,.22);
+    --bg:#0c0c0c;--bg2:#121212;--bg3:#161616;
+    --text:#e8e2d8;--muted:#888;
+    --serif:'Georgia','Times New Roman',serif;
+    --sans:'Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;}
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 48px;
+    background:rgba(12,12,12,.94);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--gold-dim);
+    transform:translateY(-100%);
+    animation:navDrop .6s .2s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes navDrop{to{transform:translateY(0);}}
+  .nav-name{font-family:var(--serif);font-size:14px;letter-spacing:.12em;color:var(--gold);}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{
+    font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;transition:color .25s;
+    position:relative;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-3px;left:0;right:0;
+    height:1px;background:var(--gold);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s;
+  }
+  .nav-links a:hover{color:var(--gold);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+
+  /* ── SCROLL REVEAL ── */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal-left.in{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal-right.in{opacity:1;transform:translateX(0);}
+  /* stagger children */
+  .stagger>*{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+  .stagger.in>*{opacity:1;transform:translateY(0);}
+  .stagger.in>*:nth-child(1){transition-delay:.05s;}
+  .stagger.in>*:nth-child(2){transition-delay:.15s;}
+  .stagger.in>*:nth-child(3){transition-delay:.25s;}
+  .stagger.in>*:nth-child(4){transition-delay:.35s;}
+
+  /* ── IMAGE HOVER ── */
+  .img-nat{overflow:hidden;}
+  .img-nat img{
+    width:100%;height:auto;display:block;
+    transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s;
+    filter:brightness(.95);
+  }
+  .img-nat:hover img{transform:scale(1.025);filter:brightness(1.05);}
+
+  /* ── UTILITIES ── */
+  .label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .sec-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;letter-spacing:.03em;margin-bottom:44px;padding-bottom:20px;border-bottom:1px solid var(--gold-dim);}
+  .en-italic{font-family:var(--serif);font-style:italic;color:var(--gold);}
+  .muted{color:var(--muted);}
+  .cap{font-size:10px;letter-spacing:.1em;color:var(--muted);margin-top:8px;text-align:center;}
+  .tag{font-size:10px;letter-spacing:.13em;text-transform:uppercase;border:1px solid var(--gold-dim);color:var(--gold);padding:5px 13px;display:inline-block;transition:background .25s,color .25s;}
+  .tag:hover{background:var(--gold);color:#000;}
+  .award{display:inline-block;margin-top:18px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);padding:6px 14px;}
+  .divider{border:none;border-top:1px solid var(--gold-dim);margin:0 auto 72px;max-width:1200px;}
+  .wrap{max-width:1200px;margin:0 auto;}
+  section{padding:96px 48px;}
+  .meta-tbl{border-collapse:collapse;width:100%;}
+  .meta-tbl td{font-size:11px;padding:8px 0;border-bottom:1px solid rgba(201,169,110,.1);}
+  .meta-tbl td:first-child{color:var(--gold);letter-spacing:.07em;padding-right:20px;white-space:nowrap;}
+  .meta-tbl td:last-child{color:var(--muted);}
+
+  /* ── HERO ── */
+  #hero{padding:0;margin-top:53px;overflow:hidden;}
+  #hero .img-nat{animation:heroReveal 1s .3s cubic-bezier(.22,1,.36,1) both;}
+  @keyframes heroReveal{from{opacity:0;transform:scale(1.04);}to{opacity:1;transform:scale(1);}}
+  #hero .img-nat img{transform:none;filter:none;}/* override hover scale for hero */
+  #hero .img-nat:hover img{transform:none;filter:none;}
+
+  /* ── ABOUT ── */
+  #about .inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .about-name{font-family:var(--serif);font-size:clamp(44px,6vw,72px);font-weight:400;line-height:1.05;margin-bottom:6px;}
+  .about-tags{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0;}
+  .about-p{font-size:13.5px;color:var(--muted);line-height:1.9;margin-bottom:14px;}
+  .avatar-wrap{width:130px;height:130px;border:2px solid var(--gold-dim);overflow:hidden;margin-bottom:22px;transition:border-color .3s;}
+  .avatar-wrap:hover{border-color:var(--gold);}
+  .avatar-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+  .avatar-wrap:hover img{transform:scale(1.06);}
+
+  /* ── INDEX ── */
+  #index-sec{background:var(--bg2);}
+  .index-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gold-dim);border:1px solid var(--gold-dim);}
+  .idx{background:var(--bg2);padding:28px;transition:background .25s,transform .25s;}
+  .idx:hover{background:#1a1a1a;transform:translateY(-2px);}
+  .idx a{text-decoration:none;color:inherit;}
+  .idx-n{font-family:var(--serif);font-size:34px;color:rgba(201,169,110,.18);line-height:1;margin-bottom:10px;transition:color .3s;}
+  .idx:hover .idx-n{color:rgba(201,169,110,.5);}
+  .idx h3{font-size:13px;letter-spacing:.07em;margin-bottom:5px;}
+  .idx p{font-size:11px;color:var(--muted);}
+
+  /* ── WORK CARD ── */
+  .work-card{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:72px;}
+  .work-card.rev{direction:rtl;}
+  .work-card.rev>*{direction:ltr;}
+  .wk-cat{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .wk-title{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:400;margin-bottom:4px;}
+  .wk-en{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--gold);margin-bottom:18px;}
+  .wk-role{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;border-bottom:1px solid var(--gold-dim);padding-bottom:14px;}
+  .wk-body{font-size:13px;color:var(--muted);line-height:1.9;}
+  .stills2{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;}
+
+  /* ── PHOTO ── */
+  .photo-2col{display:grid;grid-template-columns:2fr 1fr;gap:44px;align-items:start;}
+  .ph-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,34px);font-weight:400;margin-bottom:4px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+  .grid4 .img-nat img{display:block;}
+
+  /* ── DESIGN ── */
+  #graphic{background:var(--bg2);}
+  .ds-block{margin-bottom:68px;}
+  .ds-title{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--gold);margin-bottom:4px;}
+  .ds-en{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);margin-bottom:12px;}
+  .ds-body{font-size:13px;color:var(--muted);line-height:1.9;max-width:640px;margin-bottom:20px;}
+  .pair2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;}
+  .xhs-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;}
+  .xhs-pair .img-nat{max-width:340px;margin:0 auto;}
+
+  /* ── VI ── */
+  #vi{background:var(--bg3);}
+  .vi-banner-stack{display:flex;flex-direction:column;gap:6px;margin-top:16px;}
+  .bk-pair{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;}
+
+  /* ── CURSOR GLOW (subtle) ── */
+  .cursor-glow{
+    pointer-events:none;position:fixed;width:300px;height:300px;
+    border-radius:50%;z-index:0;
+    background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 70%);
+    transform:translate(-50%,-50%);
+    transition:transform .08s linear;
+  }
+
+  /* ── FOOTER ── */
+  footer{background:var(--bg2);padding:0;border-top:1px solid var(--gold-dim);}
+  .footer-hero .img-nat{overflow:hidden;}
+  .footer-hero .img-nat img{transition:transform 1.2s ease;filter:brightness(.85);}
+  .footer-hero .img-nat:hover img{transform:scale(1.02);}
+  .footer-bar{display:flex;align-items:center;justify-content:space-between;padding:48px;}
+  .f-name{font-family:var(--serif);font-size:clamp(28px,4vw,52px);color:var(--gold);}
+  .f-info p{font-size:12px;color:var(--muted);letter-spacing:.07em;margin-bottom:5px;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav{padding:13px 20px;}
+    .nav-links{gap:14px;}
+    section{padding:72px 20px;}
+    /* 强制覆盖行内grid样式 */
+    #about .inner{grid-template-columns:1fr !important;gap:32px !important;}
+    .reveal-left{position:static !important;top:auto !important;}
+    .work-card,.work-card.rev,.photo-2col{grid-template-columns:1fr;}
+    .work-card.rev{direction:ltr;}
+    .index-grid{grid-template-columns:1fr 1fr;}
+    .pair2,.bk-pair{grid-template-columns:1fr;}
+    .xhs-pair{grid-template-columns:1fr;}
+    .grid4{grid-template-columns:1fr 1fr;}
+    .footer-bar{flex-direction:column;gap:24px;text-align:center;}
+    /* 覆盖行内写的多列grid */
+    div[style*="grid-template-columns:3fr"],
+    div[style*="grid-template-columns:2fr"]{
+      grid-template-columns:1fr !important;
+      gap:20px !important;
+    }
+  }
+  @media(max-width:520px){
+    section{padding:60px 16px;}
+    .nav-links{display:none;}
+    .index-grid,.grid4{grid-template-columns:1fr;}
+    .stills2,.bk-pair{grid-template-columns:1fr;}
+    /* 所有行内1fr 1fr双栏 → 单栏 */
+    div[style*="grid-template-columns:1fr 1fr"]{
+      grid-template-columns:1fr !important;
+      gap:16px !important;
+    }
+    .about-name{font-size:36px !important;}
+    .avatar-wrap{width:90px !important;height:90px !important;}
+    .footer-bar{padding:32px 20px;}
+    .f-name{font-size:32px;}
+  }
+
+  /* ── LOADING SCREEN ── */
+  #loader{
+    position:fixed;inset:0;z-index:999;background:var(--bg);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:20px;
+    animation:loaderOut .4s 1.2s ease forwards;
+    pointer-events:none;
+  }
+  @keyframes loaderOut{to{opacity:0;visibility:hidden;}}
+  .loader-name{font-family:var(--serif);font-size:clamp(24px,4vw,40px);letter-spacing:.2em;color:var(--gold);opacity:0;animation:fadeUp .6s .1s ease forwards;}
+  .loader-sub{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp .6s .3s ease forwards;}
+  .loader-line{width:0;height:1px;background:var(--gold);animation:lineGrow .8s .2s ease forwards;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes lineGrow{to{width:160px;}}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-name">丁 齐 儿</div>
+  <div class="loader-line"></div>
+  <div class="loader-sub">Portfolio 2026</div>
+</div>
+
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="glow"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">丁齐儿 · Qier Ding</span>
+  <div class="nav-links">
+    <a href="#about">简介</a>
+    <a href="#moving">影像</a>
+    <a href="#photo">摄影</a>
+    <a href="#graphic">设计</a>
+    <a href="#vi">视觉识别</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="img-nat"><img src="img01_cover_banner.jpg" alt="丁齐儿 Cheer Ting · Portfolio 2026 封面"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:96px 48px;">
+  <div class="wrap inner" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+    <div class="reveal-left" style="position:sticky;top:80px;">
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:28px;">
+        <div class="avatar-wrap" style="flex-shrink:0;margin-bottom:0;">
+          <img src="img03_avatar_illustration.jpg" alt="Qier Ding 插画形象">
+        </div>
+        <div>
+          <div class="label">About · 关于</div>
+          <h1 class="about-name" style="font-size:clamp(36px,5vw,60px);">丁 齐 儿</h1>
+          <span class="en-italic" style="font-size:17px;display:block;">Qier Ding</span>
+        </div>
+      </div>
+      <div class="about-tags stagger">
+        <span class="tag">Moving Image</span>
+        <span class="tag">Photography</span>
+        <span class="tag">Graphic Design</span>
+        <span class="tag">Art Direction</span>
+      </div>
+      <p class="about-p" style="margin-top:8px;">我的创作游走于影像、摄影与设计之间，探索表演与真实之间那片微妙的空隙。通过每一种媒介，我追问身份如何被建构、自我认知如何在压力下偏移，以及光与形式如何成为内心世界的语言。</p>
+      <p class="about-p">My work moves between moving image, photography, and design — tracing the space between what is performed and what is truly felt. Through each medium I ask how identity is assembled, how self-perception shifts under pressure, and how light and form become the language of an inner life.</p>
+      <p style="font-size:12px;letter-spacing:.07em;color:var(--muted);margin-top:8px;line-height:2;">澳門大學 · University of Macau<br>哲学硕士（教育行政管理）· MPhil Education Administration</p>
+    </div>
+    <div class="reveal-right">
+      <div class="img-nat"><img src="img02_sunset_river.jpg" alt="南京长江日落"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDEX -->
+<section id="index-sec" style="padding:72px 48px;">
+  <div class="wrap">
+    <div class="label reveal">Index · 目录</div>
+    <h2 class="sec-title reveal">作品总览</h2>
+    <div class="index-grid stagger">
+      <div class="idx"><a href="#moving"><div class="idx-n">I</div><h3>影像作品</h3><p>Moving Image</p></a></div>
+      <div class="idx"><a href="#photo"><div class="idx-n">II</div><h3>创意摄影</h3><p>Photography</p></a></div>
+      <div class="idx"><a href="#graphic"><div class="idx-n">III</div><h3>平面设计</h3><p>Graphic Design</p></a></div>
+      <div class="idx"><a href="#vi"><div class="idx-n">IV</div><h3>视觉识别</h3><p>Visual Identity</p></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVING IMAGE -->
+<section id="moving">
+  <div class="wrap">
+    <div class="label reveal">I · Moving Image · 影像作品</div>
+    <h2 class="sec-title reveal">影像作品</h2>
+
+    <!-- 01 落差 -->
+    <div class="work-card">
+      <div class="reveal-left">
+        <div class="wk-cat">01 · Music Video · Director of Photography</div>
+        <h3 class="wk-title">落差</h3>
+        <div class="wk-en">The Lost Artist</div>
+        <div class="wk-role">Music Video · Director of Photography</div>
+        <p class="wk-body">取意于那耳喀索斯神话。一位艺术家深陷于自我幻象之中——对理想自我的执着追求，在沉默中悄然腐化、走向溃败。</p>
+        <p class="wk-body" style="margin-top:10px;">After Narcissus. An artist seduced by his own reflection — where the pursuit of an idealised self curdles, quietly, into ruin.</p>
+        <span class="award">第十三届中国高校影视学会 · 短视频单元二等奖</span>
+      </div>
+      <div class="reveal-right">
+        <div class="img-nat"><img src="img05_luocha_still_mirror.jpg" alt="落差 — 镜像反射静帧"></div>
+        <div class="stills2">
+          <div class="img-nat"><img src="img06_luocha_still_sofa.jpg" alt="落差 — 室内沙发场景"></div>
+          <div class="img-nat"><img src="img07_band_portrait.jpg" alt="落差 — 乐队蓝调人像"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom:12px;">
+      <div class="img-nat"><img src="img04_concert_stage.jpg" alt="落差 — 演出现场舞台摄影"></div>
+      <p class="cap" style="margin-bottom:64px;">演出现场 · Live Performance Photography · Nanjing</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 02 表象之间 -->
+    <div class="work-card rev">
+      <div class="reveal-right">
+        <div class="wk-cat">02 · Short Film · Director</div>
+        <h3 class="wk-title">表象之间</h3>
+        <div class="wk-en">Between Selves</div>
+        <div class="wk-role">Short Film · Director</div>
+        <p class="wk-body">同一个女性，四种截然不同的状态。影片在精致与叛逆、温柔与疯狂之间来回穿行——追问我们究竟有多轻易地将一张面孔误认为一个灵魂。</p>
+        <p class="wk-body" style="margin-top:10px;">A single woman, four registers. The film moves between elegance and rebellion, softness and danger — probing how quickly we mistake a surface for a self.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;" class="stagger">
+          <span class="tag">精致 / Elegance</span><span class="tag">叛逆 / Rebellion</span>
+          <span class="tag">温柔 / Softness</span><span class="tag">疯狂 / Danger</span>
+        </div>
+      </div>
+      <div class="reveal-left">
+        <div class="img-nat"><img src="img08_tunnel_closeup.jpg" alt="表象之间 — 隧道场景近景"></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom:8px;">
+      <div class="img-nat"><img src="img10_tunnel_wide.jpg" alt="表象之间 — 隧道场景全景"></div>
+      <p class="cap">Between Selves — Tunnel Sequence · 表象之间 · 隧道场景</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOGRAPHY -->
+<section id="photo" style="background:var(--bg2);">
+  <div class="wrap">
+    <div class="label reveal">II · Photography · 创意摄影</div>
+    <h2 class="sec-title reveal">创意摄影</h2>
+
+    <div class="reveal" style="margin-bottom:72px;">
+      <div style="display:grid;grid-template-columns:3fr 2fr;gap:44px;align-items:start;">
+        <div class="img-nat"><img src="img12_drone_light_wide.jpg" alt="陵光绕梅 — 无人机光绘广景"></div>
+        <div style="padding-top:20px;">
+          <div class="label">03</div>
+          <h3 class="ph-title">陵 光 绕 梅</h3>
+          <p class="en-italic" style="font-size:15px;margin-bottom:18px;">Orbital Light over the Plum</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:20px;">三十秒，一架无人机在明孝陵上空划出发光的椭圆轨迹。古梅从下方被光晕映亮，那道光弧悬浮于空中，宛若一轮光环。</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:24px;">Thirty seconds above Ming Xiaoling Mausoleum. A drone traces luminous ellipses over the ancient plum — its blossom lit from below, the orbital trail suspended like a halo.</p>
+          <table class="meta-tbl">
+            <tr><td>Camera</td><td>Fuji GFX 100S</td></tr>
+            <tr><td>Exposure</td><td>30 s · ISO 100 · f/3</td></tr>
+            <tr><td>Technique</td><td>Drone light painting</td></tr>
+            <tr><td>Location</td><td>Nanjing 南京</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="img-nat" style="margin-top:4px;">
+        <img src="img11_drone_light_closeup.jpg" alt="陵光绕梅 — 梅花近景仰拍">
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="reveal" style="margin-bottom:8px;">
+      <div class="label">04</div>
+      <h3 class="ph-title">湖心亭看雪</h3>
+      <p class="en-italic" style="font-size:15px;margin-bottom:4px;">Watching Snow from the Lake Pavilion</p>
+      <p style="font-size:12px;color:var(--muted);letter-spacing:.07em;margin-bottom:24px;">Canon EOS R50 · Street &amp; Nature Photography · Nanjing 南京</p>
+    </div>
+    <div class="grid4 stagger">
+      <div><div class="img-nat"><img src="img13_china_post_street.jpg" alt="街角中国邮政信箱"></div><p class="cap">街角 · 中国邮政</p></div>
+      <div><div class="img-nat"><img src="img14_snow_pavilion.jpg" alt="雪中湖亭"></div><p class="cap">雪中湖亭</p></div>
+      <div><div class="img-nat"><img src="img15_tower_haze.jpg" alt="高楼迷雾"></div><p class="cap">高楼迷雾</p></div>
+      <div><div class="img-nat"><img src="img16_swans.jpg" alt="黑白天鹅"></div><p class="cap">黑白天鹅</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GRAPHIC DESIGN -->
+<section id="graphic">
+  <div class="wrap">
+    <div class="label reveal">III · Graphic Design · 平面设计</div>
+    <h2 class="sec-title reveal">平面设计</h2>
+
+    <div class="ds-block reveal">
+      <div class="label">05 · Poster Design · 海报设计</div>
+      <h3 class="ds-title">濠鏡研究生論壇</h3>
+      <p class="ds-en">Hou Keang Postgraduate Symposium · 2026 · University of Macau</p>
+      <p class="ds-body">以大湾区斜拉桥的几何结构融合道家祥云图腾，采用双色调蓝，在当代与古典之间构建张力，呈现一套兼具视觉冲击力与文化厚度的视觉识别系统。</p>
+      <p class="ds-body">A visual identity system fusing the cable-stay geometry of Greater Bay Area infrastructure with Taoist cloud iconography — rendered in duotone blue that oscillates between the contemporary and the classical.</p>
+      <!-- 上排：两张设计稿并列 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+        <div>
+          <div class="img-nat"><img src="img17_poster_vertical.jpg" alt="Poster A · Modern Blue — 设计稿"></div>
+          <p class="cap">Poster A · Modern Blue · 现代蓝</p>
+        </div>
+        <div>
+          <div class="img-nat"><img src="img17b_poster_swiss.jpg" alt="Poster B · Swiss Grid — 设计稿"></div>
+          <p class="cap">Poster B · Swiss Grid · 瑞士网格</p>
+        </div>
+      </div>
+      <!-- 下排：两张实物照并列 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+        <div>
+          <div class="img-nat"><img src="img18_poster_situ_A.jpg" alt="Poster A — 实物展示"></div>
+          <p class="cap">Poster A · In Situ · 实物展示</p>
+        </div>
+        <div>
+          <div class="img-nat"><img src="img19_poster_situ_B.jpg" alt="Poster B — 实物展示"></div>
+          <p class="cap">Poster B · In Situ · 实物展示</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">06 · Event Banner · 活动横幅</div>
+      <h3 class="ds-title">2026 濠鏡研究生論壇</h3>
+      <p class="ds-en">Hou Keang Postgraduate Symposium · Digital Display &amp; Print Banner</p>
+      <p class="ds-body">以港珠澳大桥为核心视觉元素，融合科技感流线与湾区地标意象，统一论坛各环节的品牌调性。</p>
+      <div class="img-nat"><img src="img20_event_banner.jpg" alt="2026濠镜研究生论坛 活动横幅"></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">07 · Publication Design · 出版物设计</div>
+      <h3 class="ds-title">参会手册</h3>
+      <p class="ds-en">Participation Handbook · Cover &amp; Interior Spread · Bilingual Layout</p>
+      <p class="ds-body">中英双语排版，涵盖封面设计、校园地图、论坛介绍等内页，视觉风格与整体品牌系统高度统一，兼顾可读性与设计感。</p>
+      <div class="pair2">
+        <div><div class="img-nat"><img src="img21_handbook_cover.jpg" alt="参会手册封面"></div><p class="cap">Cover · 封面 · Bilingual Layout</p></div>
+        <div><div class="img-nat"><img src="img22_handbook_interior.jpg" alt="参会手册内页展开图"></div><p class="cap">Interior Spread · 内页展开 · Schedule &amp; Map</p></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">08 · Social Media Content · 小红书推文</div>
+      <h3 class="ds-title">時代沙龍 · Era Salon</h3>
+      <p class="ds-en">XiaoHongShu Series · 专家介绍 &amp; 获奖名单</p>
+      <p class="ds-body">为濠镜研究生论坛时代沙龙板块制作系列小红书推文，涵盖评审专家介绍及获奖名单公示，采用竖屏滚动排版，视觉清晰，信息层级分明。</p>
+      <div class="xhs-pair">
+        <div class="img-nat"><img src="img23_xhs_intro.jpg" alt="小红书推文 — 时代沙龙专家介绍"></div>
+        <div class="img-nat"><img src="img24_xhs_awards.jpg" alt="小红书推文 — 获奖名单公示"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">Logo &amp; PPT Background · 标志与演示背景</div>
+      <div class="pair2">
+        <div>
+          <div class="label" style="margin-bottom:12px;">濠镜论坛 Logo · Visual Identity</div>
+          <div style="background:#edf0f7;display:flex;align-items:center;justify-content:center;padding:20px;">
+            <img src="img25_logo.jpg" alt="濠镜论坛 Logo — 莲花祥云设计" style="width:100%;height:auto;object-fit:contain;display:block;">
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-top:14px;">以莲花为核心图腾，取其「出淤泥而不染」之意；祥云环绕，呼应澳门「濠镜」的历史底蕴；深蓝底色与金色莲花形成冷暖对比，兼具古典意蕴与现代气质。</p>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:12px;">濠镜主题 PPT 背景图 · Background Series</div>
+          <div style="height:300px;overflow:hidden;">
+            <img src="img26_ppt_bg.jpg" alt="濠镜主题 PPT 背景图" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-top:14px;">以港珠澳大桥为核心视觉元素，融合科技感线条与湾区地标意象，构建贯穿整场论坛的完整视觉体系，统一各环节的视觉呈现。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL IDENTITY -->
+<section id="vi">
+  <div class="wrap">
+    <!-- 序页 -->
+    <div class="reveal" style="text-align:center;padding:40px 0 64px;">
+      <img src="img27_calligraphy.jpg" alt="濯缨阁印"
+           style="width:160px;height:160px;object-fit:contain;
+                  mix-blend-mode:multiply;opacity:.92;margin-bottom:28px;display:block;margin-left:auto;margin-right:auto;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:20px;">
+        <div style="height:1px;width:60px;background:var(--gold-dim);"></div>
+        <span style="font-family:var(--serif);font-size:56px;color:rgba(201,169,110,.15);line-height:1;">IV</span>
+        <div style="height:1px;width:60px;background:var(--gold-dim);"></div>
+      </div>
+      <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:400;letter-spacing:.12em;margin-bottom:8px;border:none;padding:0;">视 觉 识 别</h2>
+      <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">Visual Identity</p>
+    </div>
+
+    <div class="ds-block reveal">
+      <div class="label">09 · Election Campaign Banners · 选举横幅</div>
+      <h3 class="ds-title">濯缨閣 · ZOK JING GOK</h3>
+      <p class="ds-en">20th University of Macau Postgraduate Association · Leadership Election · 2025</p>
+      <p class="ds-body">为澳门大学研究生会第二十届领导机关选举专项设计的三组横幅，每一幅均将中国古典绘画传统与当代水彩插画相融合，呈现澳大校园、古澳门两大主题风格。Series of 3 · Digital Display · 1818 × 639 px.</p>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:16px;">
+        <div><div class="img-nat"><img src="img28_election_banner1.jpg" alt="选举横幅 — 澳大校园水彩版"></div><p class="cap">澳大版 · University of Macau Campus · Watercolour</p></div>
+        <div><div class="img-nat"><img src="img29_election_banner2.jpg" alt="选举横幅 — 古澳门版 I 插画"></div><p class="cap">古澳門版 I · Historical Macao · Illustration</p></div>
+        <div><div class="img-nat"><img src="img30_election_banner3.jpg" alt="选举横幅 — 古澳门版 II 水彩"></div><p class="cap">古澳門版 II · Historical Macao · Watercolour</p></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">10 · Commemorative Bookmarks · 纪念书签</div>
+      <h3 class="ds-title">濯缨閣 · Print Collateral</h3>
+      <p class="ds-en">Double-sided · Front &amp; Back · 2025</p>
+      <p class="ds-body">双面印刷书签，正面呈现淡墨山水与深蓝水墨两种风格，背面含竞选声明、二维码及社交媒体信息，排版简洁，中英双语。</p>
+      <div class="bk-pair">
+        <div><div class="img-nat"><img src="img31_bookmark1.jpg" alt="纪念书签 I — 淡墨封面"></div><p class="cap">书签 I · 淡墨山水</p></div>
+        <div><div class="img-nat"><img src="img32_bookmark2.jpg" alt="纪念书签 II — 深蓝水墨"></div><p class="cap">书签 II · 深蓝水墨</p></div>
+        <div><div class="img-nat"><img src="img33_bookmark_back.jpg" alt="纪念书签 — 背面设计"></div><p class="cap">背面设计 · Back Design</p></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="ds-block reveal">
+      <div class="label">11 · Website Management · 网站管理</div>
+      <h3 class="ds-title">UMPA 官方网站</h3>
+      <p class="ds-en">Official Website · umpa.studio · NotionNext · Bilingual</p>
+      <p class="ds-body">澳门大学研究生会官方数字平台，基于 NotionNext 构建，承载协会简介、往期刊物及中英双语通告，负责日常内容更新与全媒体矩阵管理，落实「三审三校」制度确保零失误。</p>
+      <div class="img-nat"><img src="img34_website.jpg" alt="umpa.studio 官方网站截图"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-hero"><div class="img-nat"><img src="img35_fireworks.jpg" alt="澳门烟花"></div></div>
+  <div class="footer-bar">
+    <div class="f-name">丁齐儿</div>
+    <div class="f-info">
+      <p>Moving Image · Photography · Graphic Design</p>
+      <p>University of Macau · 澳門大學 · 2026</p>
+      <p style="margin-top:10px;color:var(--gold);">835871120@QQ.COM</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── 鼠标光晕跟随 ──
+const glow = document.getElementById('glow');
+document.addEventListener('mousemove', e => {
+  glow.style.transform = `translate(${e.clientX - 150}px, ${e.clientY - 150}px)`;
+});
+
+// ── 滚动显现（IntersectionObserver）──
+const revealEls = document.querySelectorAll(
+  '.reveal, .reveal-left, .reveal-right, .stagger'
+);
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.classList.add('in');
+      obs.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => obs.observe(el));
+
+// ── 导航栏滚动变色 ──
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.style.borderBottomColor = window.scrollY > 60
+    ? 'rgba(201,169,110,.35)'
+    : 'rgba(201,169,110,.22)';
+});
+</script>
+</body>
+</html>
