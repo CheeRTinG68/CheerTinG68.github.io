@@ -254,7 +254,7 @@
     <div class="reveal-left" style="position:sticky;top:80px;">
       <div style="display:flex;align-items:center;gap:20px;margin-bottom:28px;">
         <div class="avatar-wrap" style="flex-shrink:0;margin-bottom:0;">
-          <img src="img03_avatar_illustration.jpg" alt="Qier Ding 插画形象">
+          <img src="img03_avatar_illustration.png" alt="Qier Ding 插画形象">
         </div>
         <div>
           <div class="label">About · 关于</div>
@@ -268,8 +268,11 @@
         <span class="tag">Graphic Design</span>
         <span class="tag">Art Direction</span>
       </div>
-      <p class="about-p" style="margin-top:8px;">我的创作游走于影像、摄影与设计之间，探索表演与真实之间那片微妙的空隙。通过每一种媒介，我追问身份如何被建构、自我认知如何在压力下偏移，以及光与形式如何成为内心世界的语言。</p>
-      <p class="about-p">My work moves between moving image, photography, and design — tracing the space between what is performed and what is truly felt. Through each medium I ask how identity is assembled, how self-perception shifts under pressure, and how light and form become the language of an inner life.</p>
+      <p class="about-p" style="margin-top:8px;">南京、特洛伊、澳门——三座城市，三种彼此不能翻译的气质。</p>
+      <p class="about-p">南京给了我历史的重量，那种渗进砖缝里的、说不清来历的沉。美国亚拉巴马州的特洛伊是一座小到几乎让人慌张的小城，公路笔直地伸进玉米地和松林里，没有尽头——在那里，我第一次真正理解什么叫"陌生"，以及陌生怎样缓慢地变成另一种熟悉。澳门则是悖论本身——弹丸之地，却装着东西两种文明数百年的对望与妥协。</p>
+      <p class="about-p">在三座城市之间辗转，我渐渐明白，所谓"观看"，从来不是一种中立的行为。你在哪里长大，你就学会了以那里的眼光打量世界；你离开得越远，就越能看见那双眼睛本身的形状。</p>
+      <p class="about-p">学传媒，让我相信叙事是理解世界的方式。拿起相机，让我开始怀疑语言。</p>
+              <p class="about-p">有些东西，文字抵达不了——光在旧墙上停留的那个角度，一个人在人群里忽然走神的瞬间，雨夜里所有人屏住呼吸等待快门的那三十秒。我做这些，只是不想让那些值得被看见的东西，就这样悄悄消失。</p>
       <p style="font-size:12px;letter-spacing:.07em;color:var(--muted);margin-top:8px;line-height:2;">澳門大學 · University of Macau<br>哲学硕士（教育行政管理）· MPhil Education Administration</p>
     </div>
     <div class="reveal-right">
@@ -301,10 +304,10 @@
     <!-- 01 落差 -->
     <div class="work-card">
       <div class="reveal-left">
-        <div class="wk-cat">01 · Music Video · Director of Photography</div>
+        <div class="wk-cat">01 · Music Video · 摄影师 · Director of Photography</div>
         <h3 class="wk-title">落差</h3>
         <div class="wk-en">The Lost Artist</div>
-        <div class="wk-role">Music Video · Director of Photography</div>
+        <div class="wk-role">Music Video · Director of Photography · 摄影</div>
         <p class="wk-body">取意于那耳喀索斯神话。一位艺术家深陷于自我幻象之中——对理想自我的执着追求，在沉默中悄然腐化、走向溃败。</p>
         <p class="wk-body" style="margin-top:10px;">After Narcissus. An artist seduced by his own reflection — where the pursuit of an idealised self curdles, quietly, into ruin.</p>
         <span class="award">第十三届中国高校影视学会 · 短视频单元二等奖</span>
@@ -388,6 +391,52 @@
       </div>
       <div class="img-nat" style="margin-top:4px;">
         <img src="img11_drone_light_closeup.jpg" alt="陵光绕梅 — 梅花近景仰拍">
+      </div>
+      <!-- 创作手记 可展开 -->
+      <div style="margin-top:40px;">
+        <button onclick="
+          const c=document.getElementById('note-luocha');
+          const a=document.getElementById('note-arrow');
+          const open=c.style.maxHeight&&c.style.maxHeight!=='0px';
+          c.style.maxHeight=open?'0px':'2000px';
+          c.style.opacity=open?'0':'1';
+          a.style.transform=open?'rotate(0deg)':'rotate(180deg)';
+        " style="
+          width:100%;display:flex;align-items:center;justify-content:space-between;
+          background:none;border:1px solid var(--gold-dim);padding:18px 24px;
+          cursor:pointer;color:var(--text);transition:border-color .3s,background .3s;
+        " onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(201,169,110,.04)'"
+           onmouseout="this.style.borderColor='rgba(201,169,110,.22)';this.style.background='none'">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);">创作手记 · Artist's Note</span>
+            <span style="font-family:var(--serif);font-style:italic;font-size:13px;color:var(--muted);">那一夜，雨还没停。</span>
+          </div>
+          <span id="note-arrow" style="color:var(--gold);font-size:18px;transition:transform .4s;">↓</span>
+        </button>
+        <div id="note-luocha" style="
+          max-height:0;opacity:0;overflow:hidden;
+          transition:max-height .8s cubic-bezier(.4,0,.2,1),opacity .5s ease;
+          border:1px solid var(--gold-dim);border-top:none;
+          background:var(--bg3);padding:0 40px;
+        ">
+          <div style="padding:36px 0;">
+            <p style="font-family:var(--serif);font-size:15px;color:var(--gold);margin-bottom:24px;letter-spacing:.06em;">那一夜，雨还没停。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">选择明孝陵，从来不需要理由。南京人和这座城的关系，不是观光客和景点的关系，而是某种更接近血缘的东西——你不一定常去，但它在那里，你就安心。明孝陵的梅花林，我来过不止一次，却始终觉得，用寻常的方式拍它，是一种辜负。它在那里站了六百年，见过的光线比任何摄影师都多。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">真正让这张照片成立的，是一群退休老人。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">他们在老年大学学摄影，背着比我重的相机，对每一次光线变化的耐心远超我这个年纪的人。我们聊到无人机光绘——用无人机在夜空中飞出轨迹，配合三十秒的长曝光，让光在底片上留下一道时间的痕迹。其中一位老先生说：如果在梅树上方飞出一个圆，像不像古画里那轮从未落下去的月亮？</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">我没有立刻回答。因为那一刻，我已经看见了那张照片。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">那一晚是暴雨天。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">原定的拍摄窗口一再被大雨击碎。雨中的无人机飞不起来，湿气让空气变得躁动，什么都无法静止。我们在亭子里等，看雨水沿着瓦檐的弧度滑落，看梅花在风里俯仰。几位老先生泡着茶，并不焦躁。其中一位说，他年轻时在野外等过一只鸟等了三天。三天。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">雨势稍缓，我们起飞。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">第一次，光环飞偏，椭圆裂成了一道没有结尾的弧线。第二次，曝光不足，轨迹像一句话说到一半就断掉了。第三次，一切终于对了——无人机匀速划过夜空，三十秒，光在古建筑的屋檐上方画出一个完整的椭圆，悬停在盛开的梅枝之上，像一枚从天而降的印鉴，又像某种古老仪式里才会出现的光晕。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">监视器亮起来的那一刻，没有人说话。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">后来有人问我，这张照片想表达什么。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px;">我想了很久，才意识到它其实什么都没有"表达"——它只是诚实地记录了一个事实：那一夜，一群人在雨里等待，等那些无法控制的东西，刚好落进镜头里。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:24px;">光环是设计的。但雨、风、梅花在湿气里散发的气味，以及几位老人脸上那种安静的、对结果毫不执念的神情——这些，不是任何人能够设计的。</p>
+            <p style="font-size:13px;color:var(--muted);line-height:2;margin-bottom:24px;">摄影教会我的，从来不是如何控制画面，而是如何在失控中，保持等待的耐心。</p>
+            <p style="font-size:11px;color:rgba(201,169,110,.5);letter-spacing:.08em;">拍摄于南京明孝陵梅花山 · Fuji GFX 100S · 30s · ISO 100 · f/3 · 无人机光绘</p>
+          </div>
+        </div>
       </div>
     </div>
 
